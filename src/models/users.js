@@ -18,7 +18,7 @@ const UserModel = {
         const result = await pool.query(query, [userId, appId]);
         return result.rows[0];
     },
-
+ //test
     updateUser: async (userId, appId, updates) => {
         const query = `
             UPDATE Users
