@@ -16,6 +16,7 @@ const app = express();
 app.use(bodyParser.json());
 
 // API Routes
+
 app.use('/api/developers', developersRoutes);
 app.use('/api/applications', applicationsRoutes);
 app.use('/api/users', usersRoutes);
