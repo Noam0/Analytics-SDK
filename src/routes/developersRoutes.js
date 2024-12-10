@@ -19,6 +19,7 @@ const router = express.Router();
  *               - email
  *               - name
  *               - apiKey
+ *               - password
  *             properties:
  *               email:
  *                 type: string
@@ -29,6 +30,9 @@ const router = express.Router();
  *               apiKey:
  *                 type: string
  *                 description: API key for the developer
+ *               password:
+ *                 type: string
+ *                 description: Password for the developer
  *     responses:
  *       201:
  *         description: Developer registered successfully
@@ -39,10 +43,16 @@ const router = express.Router();
  *               properties:
  *                 email:
  *                   type: string
+ *                   description: Developer's email address
  *                 name:
  *                   type: string
+ *                   description: Name of the developer
  *                 apiKey:
  *                   type: string
+ *                   description: API key for the developer
+ *                 password:
+ *                   type: string
+ *                   description: Hashed password (optional display, for demonstration purposes)
  *       400:
  *         description: Invalid input or missing required fields
  *       500:
