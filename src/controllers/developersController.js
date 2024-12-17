@@ -58,6 +58,19 @@ const DevelopersController = {
       res.status(500).json({ error: "Internal server error." });
     }
   },
+
+  getAllDevelopers: async (req, res) => {
+    try {
+      // Call the service to fetch all developers
+      const developers = await DevelopersService.getAllDevelopers();
+  
+      // Return 200 with an empty array if no developers are found
+      res.status(200).json(developers || []);
+    } catch (error) {
+      console.error("Error fetching developers:", error);
+      res.status(500).json({ error: "Internal server error." });
+    }
+  },
 };
 
 module.exports = DevelopersController;

@@ -36,6 +36,33 @@ const ApplicationsController = {
             res.status(500).json({ error: 'Internal Server Error' });
         }
     },
+    getAllApplications: async (req, res) => {
+        try {
+            // Correct method name called from ApplicationsService
+            const applications = await ApplicationsService.getAllApplications(); 
+            
+            // Handle the case where no applications are found
+            if (!applications || applications.length === 0) {
+                return res.status(200).json({
+                    message: 'No applications found',
+                    data: [],
+                });
+            }
+    
+            // Return the applications
+            res.status(200).json({
+                message: 'Applications retrieved successfully',
+                data: applications,
+            });
+        } catch (error) {
+            console.error('Error retrieving applications:', error);
+    
+            // Send an appropriate server error response
+            res.status(500).json({
+                error: 'Internal Server Error',
+            });
+        }
+    },
 };
 
 module.exports = ApplicationsController;

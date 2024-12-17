@@ -34,6 +34,12 @@ const DevelopersModel = {
     const result = await pool.query(query, [email]);
     return result.rowCount > 0; // Returns true if the developer exists
   },
+
+  getAllDevelopers: async () => {
+    const query = `SELECT * FROM developers;`;
+    const result = await pool.query(query);
+    return result.rows;
+  },
 };
 
 module.exports = DevelopersModel;

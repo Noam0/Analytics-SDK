@@ -22,6 +22,10 @@ const ApplicationsService = {
     
     getApplication: async (appId) => {
         return await ApplicationsModel.getApplicationByAppId(appId);
+    },
+
+    getAllApplications: async () =>{
+        return await ApplicationsModel.getAllApplications();
     }
 };
 

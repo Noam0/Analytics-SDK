@@ -15,6 +15,19 @@ const ApplicationsModel = {
         const result = await pool.query(query, [appId]);
         return result.rows[0];
     },
+
+    getAllApplications: async () => {
+        try {
+            const query = `SELECT * FROM applications`;
+            const result = await pool.query(query);
+            
+            // Ensure rows are returned properly
+            return result.rows;
+        } catch (error) {
+            console.error('Error fetching applications:', error);
+            throw new Error('Failed to retrieve applications');
+        }
+    },
 };
 
 module.exports = ApplicationsModel;

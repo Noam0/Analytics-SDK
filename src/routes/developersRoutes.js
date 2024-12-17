@@ -5,6 +5,38 @@ const router = express.Router();
 
 /**
  * @swagger
+ * /developers/getAllDevelopers:
+ *   get:
+ *     summary: Retrieve all developers
+ *     tags: [Developers]
+ *     description: Returns a list of all registered developers. If no developers are found, it returns an empty array.
+ *     responses:
+ *       200:
+ *         description: A list of developers (empty array if no data).
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   email:
+ *                     type: string
+ *                     description: The developer's email address.
+ *                   name:
+ *                     type: string
+ *                     description: The name of the developer.
+ *                   apiKey:
+ *                     type: string
+ *                     description: The unique API key for the developer.
+ *       500:
+ *         description: Internal server error.
+ */
+router.get("/getAllDevelopers", DevelopersController.getAllDevelopers);
+
+
+/**
+ * @swagger
  * /developers:
  *   post:
  *     summary: Register a new developer
@@ -138,5 +170,8 @@ router.get(
   "/:email/applications",
   DevelopersController.getDeveloperApplications
 );
+
+
+
 
 module.exports = router;

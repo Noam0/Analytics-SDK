@@ -25,6 +25,10 @@ const DevelopersService = {
   getApplicationsByDeveloper: async (email) => {
     return await DevelopersModel.fetchApplicationsByDeveloper(email);
   },
+
+  getAllDevelopers: async () => {
+    return await DevelopersModel.getAllDevelopers();
+  },
 };
 
 module.exports = DevelopersService;

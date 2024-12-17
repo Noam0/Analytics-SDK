@@ -103,5 +103,44 @@ router.post('/', ApplicationsController.registerApplication);
  */
 router.get('/:appId', ApplicationsController.getApplication);
 
+/**
+ * @swagger
+ * /applications/admin/getAllApplications:
+ *   get:
+ *     summary: Get all applications
+ *     tags: [Applications]
+ *     responses:
+ *       200:
+ *         description: List of all registered applications
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   appId:
+ *                     type: string
+ *                     description: The unique ID of the application
+ *                   developerEmail:
+ *                     type: string
+ *                     description: The email of the developer who owns the application
+ *                   name:
+ *                     type: string
+ *                     description: The name of the application
+ *                   description:
+ *                     type: string
+ *                     description: A brief description of the application
+ *                   createdAt:
+ *                     type: string
+ *                     format: date-time
+ *                     description: The timestamp when the application was registered
+ *       500:
+ *         description: Internal server error
+ */
+router.get('/admin/getAllApplications', ApplicationsController.getAllApplications);
+
+module.exports = router;
+
 
 module.exports = router;
