@@ -1,4 +1,5 @@
 const express = require("express");
+
 const DevelopersController = require("../controllers/developersController");
 
 const router = express.Router();
@@ -171,6 +172,68 @@ router.get(
   DevelopersController.getDeveloperApplications
 );
 
+
+
+/**
+ * @swagger
+ * /developers/login:
+ *   post:
+ *     summary: Login a developer
+ *     tags: [Developers]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 description: Developer's email address
+ *               password:
+ *                 type: string
+ *                 description: Developer's password
+ *     responses:
+ *       200:
+ *         description: Login successful
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Login message
+ *                 developer:
+ *                   type: object
+ *                   properties:
+ *                     email:
+ *                       type: string
+ *                     name:
+ *                       type: string
+ *                     apps:
+ *                       type: array
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           appId:
+ *                             type: string
+ *                           name:
+ *                             type: string
+ *                 token:
+ *                   type: string
+ *                   description: JWT token for authentication
+ *       400:
+ *         description: Missing required fields
+ *       401:
+ *         description: Invalid credentials
+ *       500:
+ *         description: Internal server error
+ */
+router.post('/login', DevelopersController.loginDeveloper);
 
 
 

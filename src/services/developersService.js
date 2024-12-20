@@ -29,6 +29,18 @@ const DevelopersService = {
   getAllDevelopers: async () => {
     return await DevelopersModel.getAllDevelopers();
   },
+
+  authenticateDeveloper: async (email, password) => {
+    const developer = await DevelopersModel.getDeveloperByEmail(email);
+    if (password === developer.password) {
+        return developer;
+    }
+    return null;
+},
+
+getDeveloperApplications: async (email) => {
+    return await DevelopersModel.fetchApplicationsByDeveloper(email);
+}
 };
 
 module.exports = DevelopersService;

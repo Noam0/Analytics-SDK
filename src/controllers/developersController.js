@@ -1,5 +1,6 @@
 const DevelopersService = require("../services/developersService");
 const Validators = require("../utils/validators");
+const jwt = require('jsonwebtoken');
 
 const DevelopersController = {
   registerDeveloper: async (req, res) => {
@@ -33,7 +34,7 @@ const DevelopersController = {
       res.status(200).json(developer);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: "Igfnternal Server Error" });
+      res.status(500).json({ error: "Internal Server Error" });
     }
   },
   getDeveloperApplications: async (req, res) => {
@@ -66,9 +67,43 @@ const DevelopersController = {
   
       // Return 200 with an empty array if no developers are found
       res.status(200).json(developers || []);
+      
     } catch (error) {
       console.error("Error fetching developers:", error);
       res.status(500).json({ error: "Internal server error." });
+    }
+  },
+  loginDeveloper: async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // Validate required fields
+        if (!email || !password) {
+            return res.status(400).json({ error: "Missing required fields: email or password" });
+        }
+
+        // Authenticate developer
+        const developer = await DevelopersService.authenticateDeveloper(email, password);
+        if (!developer) {
+            return res.status(401).json({ error: "Invalid email or password" });
+        }
+
+     
+        // Retrieve developer apps
+        const apps = await DevelopersService.getDeveloperApplications(email);
+
+        res.status(200).json({
+          message: "Login successful",
+          developer: {
+              email: developer.email,
+              name: developer.name,
+          },
+ 
+      });
+     
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "Internal Server Error" });
     }
   },
 };
