@@ -12,9 +12,10 @@ const appRatingsRoutes = require('./routes/appRatingsRoutes');
 const eventsRoutes = require('./routes/eventsRoutes');
 
 
+
 const app = express();
 app.use(bodyParser.json());
-
+app.use(cors());
 // API Routes
 
 app.use('/api/developers', developersRoutes);
@@ -23,7 +24,7 @@ app.use('/api/users', usersRoutes);
 app.use('/api/logs', logsRoutes);
 app.use('/api/app-ratings', appRatingsRoutes);
 app.use("/api/events", eventsRoutes);
-app.use(cors());
+
 // Swagger Documentation Route
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
