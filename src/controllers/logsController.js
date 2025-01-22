@@ -4,12 +4,12 @@ const LogsController = {
     // Add a new log
     createLog: async (req, res) => {
         try {
-            const { appId, userId, logType, description } = req.body;
-            if (!appId || !userId || !logType) {
-                return res.status(400).json({ error: 'Missing required fields: appId, userId, or logType' });
+            const { appId,  logType, description } = req.body;
+            if (!appId || !logType) {
+                return res.status(400).json({ error: 'Missing required fields: appId or logType' });
             }
 
-            const log = await LogsService.createLog({ appId, userId, logType, description });
+            const log = await LogsService.createLog({ appId, logType, description });
             res.status(201).json(log);
         } catch (error) {
             console.error(error);

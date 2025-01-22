@@ -16,16 +16,12 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             required:
- *               - appId
- *               - userId
+ *               - appId   
  *               - logType
  *             properties:
  *               appId:
  *                 type: string
  *                 description: The application ID
- *               userId:
- *                 type: string
- *                 description: The user ID
  *               logType:
  *                 type: string
  *                 description: Type of log (e.g., "Crash", "DailyLogin")

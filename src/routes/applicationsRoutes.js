@@ -140,6 +140,9 @@ router.get('/:appId', ApplicationsController.getApplication);
  */
 router.get('/admin/getAllApplications', ApplicationsController.getAllApplications);
 
+
+
+
 module.exports = router;
 
 

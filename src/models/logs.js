@@ -1,12 +1,12 @@
 const pool = require('../config/db');
 
 const LogsModel = {
-    createLog: async ({ appId, userId, logType, description }) => {
+    createLog: async ({ appId,  logType, description }) => {
         const query = `
-            INSERT INTO Logs (appId, userId, logType, description)
-            VALUES ($1, $2, $3, $4) RETURNING *;
+            INSERT INTO Logs (appId, logType, description)
+            VALUES ($1, $2, $3) RETURNING *;
         `;
-        const values = [appId, userId, logType, description];
+        const values = [appId, logType, description];
         const result = await pool.query(query, values);
         return result.rows[0];
     },
