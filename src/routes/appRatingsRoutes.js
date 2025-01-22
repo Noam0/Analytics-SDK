@@ -32,6 +32,10 @@ const router = express.Router();
  *               comment:
  *                 type: string
  *                 description: Optional comment about the application
+ *               timestamp:
+ *                 type: string
+ *                 format: date-time
+ *                 description: The timestamp of the rating (optional, defaults to current time if omitted)
  *     responses:
  *       201:
  *         description: Rating added successfully

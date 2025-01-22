@@ -28,6 +28,10 @@ const router = express.Router();
  *               description:
  *                 type: string
  *                 description: Detailed description of the log
+ *               timestamp:
+ *                 type: string
+ *                 format: date-time
+ *                 description: The timestamp of the log (optional, defaults to current time if omitted)
  *     responses:
  *       201:
  *         description: Log created successfully
@@ -121,6 +125,31 @@ router.get('/:logId', LogsController.getLogById);
  *         description: Internal server error
  */
 router.get('/applications/:appId', LogsController.getLogsByAppId);
+
+
+/**
+ * @swagger
+ * /logs/applications/{appId}:
+ *   delete:
+ *     summary: Delete all logs of an application by appId
+ *     tags: [Logs]
+ *     parameters:
+ *       - in: path
+ *         name: appId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the application whose logs need to be deleted
+ *     responses:
+ *       200:
+ *         description: Logs deleted successfully
+ *       404:
+ *         description: No logs found for the given appId
+ *       500:
+ *         description: Internal server error
+ */
+router.delete('/applications/:appId', LogsController.deleteLogsByAppId);
+
 
 /**
  * @swagger

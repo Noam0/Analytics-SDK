@@ -47,7 +47,18 @@ CREATE TYPE public.log_type_enum AS ENUM (
     'Crash',
     'DailyLogin',
     'Error',
-    'Other'
+    'Other',
+    'DataExport',
+    'LifeCycle',
+    'UserLogin',
+    'UserLogout',
+    'AccountLocked',
+    'FeatureUsed',
+    'SettingsChanged',
+    'AccessDenied',
+    'APIRequestFailed',
+    'ButtonClicked',
+    'PageViewed'
 );
 
 

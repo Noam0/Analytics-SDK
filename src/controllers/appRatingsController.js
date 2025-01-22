@@ -3,9 +3,20 @@ const AppRatingsService = require('../services/appRatingsService');
 const AppRatingsController = {
     createRating: async (req, res) => {
         try {
-            const { appId, userId, rating, comment } = req.body;
+            const { appId, userId, rating, comment, timestamp } = req.body;
 
-            const newRating = await AppRatingsService.createRating({ appId, userId, rating, comment });
+            if (!appId || !userId || !rating) {
+                return res.status(400).json({ error: 'Missing required fields: appId, userId, rating' });
+            }
+
+            const newRating = await AppRatingsService.createRating({
+                appId,
+                userId,
+                rating,
+                comment,
+                timestamp: timestamp || new Date().toISOString() // Default to current time
+            });
+
             res.status(201).json(newRating);
         } catch (error) {
             console.error(error.message);

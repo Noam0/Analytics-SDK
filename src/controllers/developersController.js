@@ -106,6 +106,24 @@ const DevelopersController = {
         res.status(500).json({ error: "Internal Server Error" });
     }
   },
+  deleteDeveloperApplications: async (req, res) => {
+    try {
+        const { email } = req.params;
+
+        // Call service function to delete applications
+        const deletedCount = await DevelopersService.deleteDeveloperApplications(email);
+
+        if (deletedCount === 0) {
+            return res.status(404).json({ message: `No applications found for developer with email: ${email}` });
+        }
+
+        res.status(200).json({ message: `Successfully deleted ${deletedCount} applications for developer: ${email}` });
+    } catch (error) {
+        console.error("Error deleting applications:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
+  
 };
 
 module.exports = DevelopersController;

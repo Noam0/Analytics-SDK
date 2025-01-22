@@ -16,6 +16,10 @@ const LogsService = {
     getLogsByType: async (appId, type) => {
         return await LogsModel.getLogsByType(appId, type);
     },
+    deleteLogsByAppId: async (appId) => {
+        return await LogsModel.deleteLogsByAppId(appId);
+    },
+    
 
     
 };

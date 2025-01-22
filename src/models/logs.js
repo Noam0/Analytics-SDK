@@ -1,12 +1,13 @@
 const pool = require('../config/db');
 
 const LogsModel = {
-    createLog: async ({ appId,  logType, description }) => {
-        const query = `
-            INSERT INTO Logs (appId, logType, description)
-            VALUES ($1, $2, $3) RETURNING *;
-        `;
-        const values = [appId, logType, description];
+    createLog: async ({ appId, logType, description, timestamp }) => {
+        const query = timestamp
+            ? `INSERT INTO logs (appId, logType, description, "timestamp") VALUES ($1, $2, $3, $4) RETURNING *;`
+            : `INSERT INTO logs (appId, logType, description) VALUES ($1, $2, $3) RETURNING *;`;
+
+        const values = timestamp ? [appId, logType, description, timestamp] : [appId, logType, description];
+
         const result = await pool.query(query, values);
         return result.rows[0];
     },
@@ -28,7 +29,13 @@ const LogsModel = {
         const values = [appId, type];
         const result = await pool.query(query, values);
         return result.rows;
+    },
+    deleteLogsByAppId: async (appId) => {
+        const query = `DELETE FROM Logs WHERE appid = $1 RETURNING *;`;
+        const result = await pool.query(query, [appId]);
+        return result.rowCount; // Returns number of deleted rows
     }
+
 
     
 };

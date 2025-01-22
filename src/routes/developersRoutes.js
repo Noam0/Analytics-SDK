@@ -237,4 +237,30 @@ router.post('/login', DevelopersController.loginDeveloper);
 
 
 
+
+
+/**
+ * @swagger
+ * /developers/{email}/applications:
+ *   delete:
+ *     summary: Delete all applications registered by a specific developer
+ *     tags: [Developers]
+ *     parameters:
+ *       - in: path
+ *         name: email
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The email of the developer whose applications should be deleted
+ *     responses:
+ *       200:
+ *         description: Applications deleted successfully
+ *       404:
+ *         description: Developer not found or no applications to delete
+ *       500:
+ *         description: Internal server error
+ */
+router.delete("/:email/applications", DevelopersController.deleteDeveloperApplications);
+
+
 module.exports = router;

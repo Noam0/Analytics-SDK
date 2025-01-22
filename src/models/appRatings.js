@@ -1,13 +1,13 @@
 const pool = require('../config/db');
 
 const AppRatingsModel = {
-    createRating: async ({ appId, userId, rating, comment }) => {
-        const query = `
-            INSERT INTO AppRatings (appId, userId, rating, comment)
-            VALUES ($1, $2, $3, $4)
-            RETURNING *;
-        `;
-        const values = [appId, userId, rating, comment];
+    createRating: async ({ appId, userId, rating, comment, timestamp }) => {
+        const query = timestamp
+            ? `INSERT INTO AppRatings (appId, userId, rating, comment, "timestamp") VALUES ($1, $2, $3, $4, $5) RETURNING *;`
+            : `INSERT INTO AppRatings (appId, userId, rating, comment) VALUES ($1, $2, $3, $4) RETURNING *;`;
+
+        const values = timestamp ? [appId, userId, rating, comment, timestamp] : [appId, userId, rating, comment];
+
         const result = await pool.query(query, values);
         return result.rows[0];
     },

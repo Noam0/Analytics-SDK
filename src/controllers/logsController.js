@@ -2,14 +2,21 @@ const LogsService = require('../services/logsService');
 
 const LogsController = {
     // Add a new log
-    createLog: async (req, res) => {
+      createLog: async (req, res) => {
         try {
-            const { appId,  logType, description } = req.body;
+            const { appId, logType, description, timestamp } = req.body;
+
             if (!appId || !logType) {
                 return res.status(400).json({ error: 'Missing required fields: appId or logType' });
             }
 
-            const log = await LogsService.createLog({ appId, logType, description });
+            const log = await LogsService.createLog({
+                appId,
+                logType,
+                description,
+                timestamp: timestamp || undefined // Ensure undefined is passed if timestamp is not provided
+            });
+
             res.status(201).json(log);
         } catch (error) {
             console.error(error);
@@ -53,6 +60,24 @@ const LogsController = {
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: 'Internal Server Error' });
+        }
+    },
+
+    deleteLogsByAppId: async (req, res) => {
+        try {
+            const { appId } = req.params;
+
+            // Call service function to delete logs
+            const deletedCount = await LogsService.deleteLogsByAppId(appId);
+
+            if (deletedCount === 0) {
+                return res.status(404).json({ message: `No logs found for appId: ${appId}` });
+            }
+
+            res.status(200).json({ message: `Successfully deleted ${deletedCount} logs for appId: ${appId}` });
+        } catch (error) {
+            console.error("Error deleting logs:", error);
+            res.status(500).json({ error: "Internal Server Error" });
         }
     }
 

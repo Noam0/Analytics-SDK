@@ -2,7 +2,7 @@ const AppRatingsModel = require('../models/appRatings');
 
 
 const AppRatingsService = {
-    createRating: async ({ appId, userId, rating, comment }) => {
+    createRating: async ({ appId, userId, rating, comment, timestamp }) => {
         // Validate application and user existence
         const applicationExists = await AppRatingsModel.doesApplicationExist(appId);
         if (!applicationExists) {
@@ -14,7 +14,7 @@ const AppRatingsService = {
             throw new Error(`User with userId ${userId} does not exist`);
         }
 
-        return await AppRatingsModel.createRating({ appId, userId, rating, comment });
+        return await AppRatingsModel.createRating({ appId, userId, rating, comment, timestamp });
     },
 
     getRatingById: async (ratingId) => {

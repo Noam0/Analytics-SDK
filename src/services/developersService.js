@@ -40,7 +40,11 @@ const DevelopersService = {
 
 getDeveloperApplications: async (email) => {
     return await DevelopersModel.fetchApplicationsByDeveloper(email);
-}
+  },
+  
+  deleteDeveloperApplications: async (email) => {
+    return await DevelopersModel.deleteDeveloperApplications(email);
+  },
 };
 
 module.exports = DevelopersService;

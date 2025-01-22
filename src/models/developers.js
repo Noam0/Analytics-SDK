@@ -41,6 +41,31 @@ const DevelopersModel = {
     return result.rows;
   },
 
+  deleteDeveloperApplications: async (email) => {
+    try {
+        // Step 1: Delete logs related to applications owned by the developer
+        await pool.query(`
+            DELETE FROM logs 
+            WHERE appid IN (SELECT appid FROM applications WHERE developeremail = $1);
+        `, [email]);
+
+        // Step 2: Delete app ratings related to applications owned by the developer
+        await pool.query(`
+            DELETE FROM appratings 
+            WHERE appid IN (SELECT appid FROM applications WHERE developeremail = $1);
+        `, [email]);
+
+        // Step 3: Delete the applications after dependent records are removed
+        const result = await pool.query(`
+            DELETE FROM applications WHERE developeremail = $1 RETURNING *;
+        `, [email]);
+
+        return result.rowCount; // Returns the number of deleted applications
+    } catch (error) {
+        console.error("Error deleting developer applications:", error);
+        throw error;
+    }
+}
 
 };
 
