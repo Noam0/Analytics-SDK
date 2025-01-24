@@ -12,13 +12,14 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data  # ✅ Ensures data is saved
+      - postgres_data:/var/lib/postgresql/data  # ✅ Persist data
+      - ./db_init/init.sql:/docker-entrypoint-initdb.d/init.sql  # ✅ Load schema on startup
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       retries: 5
       timeout: 5s
-      
+
   backend:
     build: .
     container_name: analytics_backend

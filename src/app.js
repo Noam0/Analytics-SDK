@@ -10,7 +10,7 @@ const usersRoutes = require('./routes/usersRoutes');
 const logsRoutes = require('./routes/logsRoutes');
 const appRatingsRoutes = require('./routes/appRatingsRoutes');
 const eventsRoutes = require('./routes/eventsRoutes');
-
+const geolocationRoutes = require("./routes/geolocationRoutes");
 
 
 const app = express();
@@ -24,6 +24,7 @@ app.use('/api/users', usersRoutes);
 app.use('/api/logs', logsRoutes);
 app.use('/api/app-ratings', appRatingsRoutes);
 app.use("/api/events", eventsRoutes);
+app.use("/api/geolocation", geolocationRoutes);
 
 // Swagger Documentation Route
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
