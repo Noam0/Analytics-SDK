@@ -32,14 +32,15 @@ const GeolocationModel = {
     /**
      * Get number of users per country
      */
-    getUsersPerCountry: async () => {
+    getUsersPerCountryByApp: async (appId) => {
         const query = `
             SELECT country, COUNT(DISTINCT user_id) AS user_count
             FROM geographical_analytics
+            WHERE app_id = $1
             GROUP BY country
             ORDER BY user_count DESC;
         `;
-        const result = await pool.query(query);
+        const result = await pool.query(query, [appId]);
         return result.rows;
     }
 };

@@ -41,8 +41,8 @@ const GeolocationService = {
      * Get number of users per country
      * @returns {Array} List of users count per country
      */
-    getUsersPerCountry: async () => {
-        return await GeolocationModel.getUsersPerCountry();
+    getUsersPerCountryByApp: async (appId) => {
+        return await GeolocationModel.getUsersPerCountryByApp(appId);
     },
 
     /**

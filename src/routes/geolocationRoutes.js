@@ -93,15 +93,24 @@ router.get("/app/:appId", GeolocationController.getGeolocationsByApp);
  * @swagger
  * /geolocation/users-per-country:
  *   get:
- *     summary: Get user count per country
+ *     summary: Get user count per country for a specific app
  *     tags: [Geolocation]
+ *     parameters:
+ *       - in: query
+ *         name: appId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The application ID to filter the results by
  *     responses:
  *       200:
  *         description: User count per country
+ *       400:
+ *         description: Missing appId query parameter
  *       500:
  *         description: Internal server error
  */
-router.get("/users-per-country", GeolocationController.getUsersPerCountry);
+router.get("/users-per-country", GeolocationController.getUsersPerCountryByApp);
 
 module.exports = router;
 

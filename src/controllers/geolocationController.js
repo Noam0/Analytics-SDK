@@ -48,9 +48,15 @@ const GeolocationController = {
     /**
      * Get user count per country
      */
-    getUsersPerCountry: async (req, res) => {
+    getUsersPerCountryByApp: async (req, res) => {
         try {
-            const usersPerCountry = await GeolocationService.getUsersPerCountry();
+            const { appId } = req.query;
+    
+            if (!appId) {
+                return res.status(400).json({ message: "Missing required parameter: appId" });
+            }
+    
+            const usersPerCountry = await GeolocationService.getUsersPerCountryByApp(appId);
             return res.status(200).json(usersPerCountry);
         } catch (error) {
             console.error("Error fetching user count per country:", error);
