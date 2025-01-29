@@ -143,7 +143,40 @@ router.get('/admin/getAllApplications', ApplicationsController.getAllApplication
 
 
 
-module.exports = router;
+
+
+/**
+ * @swagger
+ * /applications/average-session/{appId}:
+ *   get:
+ *     summary: Get the average session duration for an application
+ *     tags: [Applications]
+ *     parameters:
+ *       - in: path
+ *         name: appId
+ *         required: true
+ *         schema:
+ *           type: string
+ *           description: The ID of the application
+ *     responses:
+ *       200:
+ *         description: The average session duration for the app
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 appId:
+ *                   type: string
+ *                 averageSessionDuration:
+ *                   type: number
+ *                   description: The average session duration in minutes
+ *       404:
+ *         description: No session logs found
+ *       500:
+ *         description: Internal server error
+ */
+router.get('/average-session/:appId', ApplicationsController.getAverageUserTime);
 
 
 module.exports = router;

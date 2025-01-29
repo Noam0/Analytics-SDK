@@ -54,6 +54,18 @@ const AppRatingsModel = {
         const result = await pool.query(query, [userId]);
         return result.rowCount > 0;
     },
+
+
+getAverageRating: async (appId) => {
+    const query = `
+        SELECT ROUND(AVG(rating), 1) AS averageRating
+        FROM appratings
+        WHERE appid = $1;
+    `;
+
+    const result = await pool.query(query, [appId]);
+    return result.rows[0]; // Returns { averageRating: number } or null
+    },
 };
 
 module.exports = AppRatingsModel;

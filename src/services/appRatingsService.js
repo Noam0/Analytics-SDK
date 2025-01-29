@@ -32,6 +32,22 @@ const AppRatingsService = {
     deleteRating: async (ratingId) => {
         return await AppRatingsModel.deleteRating(ratingId);
     },
+
+    calculateAverageRating: async (appId) => {
+        try {
+            const result = await AppRatingsModel.getAverageRating(appId);
+    
+            if (!result || !result.averagerating) {
+                return null; // Return null if no ratings found
+            }
+    
+            return parseFloat(result.averagerating); // Ensure it's a number
+        } catch (error) {
+            console.error("Error calculating average rating:", error);
+            throw error;
+        }
+
+    },
 };
 
 module.exports = AppRatingsService;

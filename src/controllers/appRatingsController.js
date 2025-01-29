@@ -91,6 +91,22 @@ const AppRatingsController = {
             res.status(500).json({ error: 'Internal Server Error' });
         }
     },
+
+    getAverageRatingByAppId: async (req, res) => {
+        try {
+            const { appId } = req.params;
+            const averageRating = await AppRatingsService.calculateAverageRating(appId);
+    
+            if (averageRating === null || averageRating === undefined) {
+                return res.status(404).json({ message: "No ratings found for this application" });
+            }
+    
+            res.status(200).json({ appId, averageRating }); // Ensure averageRating is included
+        } catch (error) {
+            console.error("Error fetching average rating:", error);
+            res.status(500).json({ message: "Internal server error" });
+        }
+    },
 };
 
 module.exports = AppRatingsController;

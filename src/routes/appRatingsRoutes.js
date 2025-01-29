@@ -213,4 +213,38 @@ router.put('/:ratingId', AppRatingsController.updateRating);
  */
 router.delete('/:ratingId', AppRatingsController.deleteRating);
 
+
+
+/**
+ * @swagger
+ * /app-ratings/average/{appId}:
+ *   get:
+ *     summary: Get the average rating for a specific application
+ *     tags: [AppRatings]
+ *     parameters:
+ *       - in: path
+ *         name: appId
+ *         required: true
+ *         schema:
+ *           type: string
+ *           description: The ID of the application
+ *     responses:
+ *       200:
+ *         description: The average rating for the application
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 appId:
+ *                   type: string
+ *                 averageRating:
+ *                   type: number
+ *       404:
+ *         description: No ratings found for this application
+ *       500:
+ *         description: Internal server error
+ */
+router.get('/average/:appId', AppRatingsController.getAverageRatingByAppId);
+
 module.exports = router;
