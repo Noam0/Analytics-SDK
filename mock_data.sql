@@ -106,19 +106,55 @@ VALUES
     (uuid_generate_v4(), 'automate', 'user10', 'UserLogin', NOW() - INTERVAL '7 days', 'User logged in'),
     (uuid_generate_v4(), 'automate', 'user10', 'FeatureUsed', NOW() - INTERVAL '6 days 12 hours', 'Used data export'),
     (uuid_generate_v4(), 'automate', 'user10', 'DataExport', NOW() - INTERVAL '6 days 10 hours', 'Exported user activity report'),
-    (uuid_generate_v4(), 'automate', 'user10', 'LifeCycle', NOW() - INTERVAL '6 days 8 hours', 'App Destroyed')
+    (uuid_generate_v4(), 'automate', 'user10', 'LifeCycle', NOW() - INTERVAL '6 days 8 hours', 'App Destroyed'),
+    
+      (uuid_generate_v4(), 'automate', 'user1', 'UserLogout', NOW() - INTERVAL '39 minutes', 'User logged out'),
+    (uuid_generate_v4(), 'automate', 'user2', 'AccountLocked', NOW() - INTERVAL '25 minutes', 'User account locked due to failed attempts'),
+    (uuid_generate_v4(), 'automate', 'user3', 'AccessDenied', NOW() - INTERVAL '2 hours 5 minutes', 'User tried to access admin settings'),
+    (uuid_generate_v4(), 'automate', 'user4', 'APIRequestFailed', NOW() - INTERVAL '3 hours 45 minutes', 'Failed to fetch user data'),
+    (uuid_generate_v4(), 'automate', 'user5', 'Other', NOW() - INTERVAL '2 hours 15 minutes', 'General system notification'),
+    (uuid_generate_v4(), 'automate', 'user6', 'DailyLogin', NOW() - INTERVAL '1 day', 'User logged in for daily streak'),
+    (uuid_generate_v4(), 'automate', 'user7', 'DataExport', NOW() - INTERVAL '10 hours', 'User exported analytics data'),
+    (uuid_generate_v4(), 'automate', 'user8', 'Error', NOW() - INTERVAL '12 hours 30 minutes', 'App encountered an unexpected error'),
+    (uuid_generate_v4(), 'automate', 'user9', 'APIRequestFailed', NOW() - INTERVAL '2 days 10 hours', 'Failed API response from server'),
+    (uuid_generate_v4(), 'automate', 'user10', 'PageViewed', NOW() - INTERVAL '6 days 6 hours', 'Viewed settings page'),
+    (uuid_generate_v4(), 'automate', 'user11', 'AccountLocked', NOW() - INTERVAL '3 days 4 hours', 'Account temporarily locked'),
+    (uuid_generate_v4(), 'automate', 'user12', 'FeatureUsed', NOW() - INTERVAL '5 hours 10 minutes', 'User checked session statistics'),
+    (uuid_generate_v4(), 'automate', 'user13', 'SettingsChanged', NOW() - INTERVAL '7 hours', 'Changed theme to dark mode'),
+    (uuid_generate_v4(), 'automate', 'user14', 'UserLogout', NOW() - INTERVAL '15 minutes', 'User logged out of the system'),
+    (uuid_generate_v4(), 'automate', 'user15', 'Other', NOW() - INTERVAL '8 days', 'Miscellaneous system log'),
+    (uuid_generate_v4(), 'automate', 'user16', 'Crash', NOW() - INTERVAL '4 days 3 hours', 'Unexpected crash detected'),
+    (uuid_generate_v4(), 'automate', 'user17', 'DailyLogin', NOW() - INTERVAL '10 days', 'User logged in for daily bonus'),
+    (uuid_generate_v4(), 'automate', 'user18', 'ButtonClicked', NOW() - INTERVAL '18 hours', 'Clicked on notifications panel'),
+    (uuid_generate_v4(), 'automate', 'user19', 'AccessDenied', NOW() - INTERVAL '2 days 20 hours', 'User access blocked to premium section'),
+    (uuid_generate_v4(), 'automate', 'user20', 'PageViewed', NOW() - INTERVAL '4 days 8 hours', 'Viewed user reports section'),
+    (uuid_generate_v4(), 'automate', 'user21', 'Error', NOW() - INTERVAL '11 days', 'Server connection error encountered'),
+    (uuid_generate_v4(), 'automate', 'user22', 'SettingsChanged', NOW() - INTERVAL '13 hours', 'Updated two-factor authentication settings'),
+    (uuid_generate_v4(), 'automate', 'user23', 'APIRequestFailed', NOW() - INTERVAL '6 days 14 hours', 'API request timed out'),
+    (uuid_generate_v4(), 'automate', 'user24', 'LifeCycle', NOW() - INTERVAL '9 hours', 'App reloaded due to inactivity'),
+    (uuid_generate_v4(), 'automate', 'user25', 'FeatureUsed', NOW() - INTERVAL '21 hours', 'Checked active user count'),
+    (uuid_generate_v4(), 'automate', 'user26', 'Crash', NOW() - INTERVAL '3 hours 20 minutes', 'Memory overflow crash'),
+    (uuid_generate_v4(), 'automate', 'user27', 'UserLogout', NOW() - INTERVAL '4 days 2 hours', 'Session expired, user logged out'),
+    (uuid_generate_v4(), 'automate', 'user28', 'ButtonClicked', NOW() - INTERVAL '14 days', 'Clicked refresh button'),
+    (uuid_generate_v4(), 'automate', 'user29', 'DailyLogin', NOW() - INTERVAL '17 days', 'User logged in for daily rewards'),
+    (uuid_generate_v4(), 'automate', 'user30', 'DataExport', NOW() - INTERVAL '1 day 6 hours', 'Exported user session analytics')
 
 ON CONFLICT DO NOTHING;
 
 -- Insert App Ratings
 INSERT INTO public.appratings (ratingid, appid, userid, rating, comment, timestamp)
 VALUES 
-    (gen_random_uuid(), 'automate', 'user1', 5, 'Great app for analytics!', NOW() - INTERVAL '1 day'),
+    (gen_random_uuid(), 'automate', 'user1', 5, 'Great app!', NOW() - INTERVAL '1 day'),
     (gen_random_uuid(), 'automate', 'user2', 4, 'Good, but needs improvements.', NOW() - INTERVAL '2 days'),
     (gen_random_uuid(), 'automate', 'user3', 3, 'Okay, found some bugs.', NOW() - INTERVAL '3 days'),
-    (gen_random_uuid(), 'automate', 'user4', 5, 'Amazing, love the heatmaps!', NOW() - INTERVAL '4 days'),
-    (gen_random_uuid(), 'automate', 'user5', 1, 'Amazing, love the heatmaps!', NOW() - INTERVAL '4 days'),
-    (gen_random_uuid(), 'automate', 'user6', 2, 'Amazing, love the heatmaps!', NOW() - INTERVAL '4 days')
+    (gen_random_uuid(), 'automate', 'user4', 5, 'Amazing, love the app!', NOW() - INTERVAL '4 days'),
+    (gen_random_uuid(), 'automate', 'user5', 1, 'Amazing, love the app!', NOW() - INTERVAL '4 days'),
+    (gen_random_uuid(), 'automate', 'user7', 2, 'Amazing, love the app!', NOW() - INTERVAL '4 days'),
+    (gen_random_uuid(), 'automate', 'user8', 5, 'Amazing, love the app!', NOW() - INTERVAL '4 days'),
+    (gen_random_uuid(), 'automate', 'user9', 5, 'Amazing, love the app!', NOW() - INTERVAL '4 days'),
+    (gen_random_uuid(), 'automate', 'user10', 3, 'Amazing, love the app!', NOW() - INTERVAL '4 days'),
+    (gen_random_uuid(), 'automate', 'user11', 4, 'Amazing, love the app!', NOW() - INTERVAL '4 days')
+
     
 ON CONFLICT DO NOTHING;
 
