@@ -1,5 +1,5 @@
-const express = require('express');
-const LogsController = require('../controllers/logsController');
+const express = require("express");
+const LogsController = require("../controllers/logsController");
 
 const router = express.Router();
 
@@ -16,8 +16,8 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             required:
- *               - appId  
- *               - userId 
+ *               - appId
+ *               - userId
  *               - logType
  *             properties:
  *               appId:
@@ -44,7 +44,7 @@ const router = express.Router();
  *       500:
  *         description: Internal server error
  */
-router.post('/', LogsController.createLog);
+router.post("/", LogsController.createLog);
 
 /**
  * @swagger
@@ -85,7 +85,7 @@ router.post('/', LogsController.createLog);
  *       500:
  *         description: Internal server error
  */
-router.get('/:logId', LogsController.getLogById);
+router.get("/:logId", LogsController.getLogById);
 
 /**
  * @swagger
@@ -128,8 +128,7 @@ router.get('/:logId', LogsController.getLogById);
  *       500:
  *         description: Internal server error
  */
-router.get('/applications/:appId', LogsController.getLogsByAppId);
-
+router.get("/applications/:appId", LogsController.getLogsByAppId);
 
 /**
  * @swagger
@@ -152,8 +151,7 @@ router.get('/applications/:appId', LogsController.getLogsByAppId);
  *       500:
  *         description: Internal server error
  */
-router.delete('/applications/:appId', LogsController.deleteLogsByAppId);
-
+router.delete("/applications/:appId", LogsController.deleteLogsByAppId);
 
 /**
  * @swagger
@@ -202,7 +200,68 @@ router.delete('/applications/:appId', LogsController.deleteLogsByAppId);
  *       500:
  *         description: Internal server error
  */
-router.get('/applications/:appId/logType/:type', LogsController.getLogsByType);
+router.get("/applications/:appId/logType/:type", LogsController.getLogsByType);
 
+/**
+ * @swagger
+ * /logs/applications/{appId}/logType/{type}/month/{month}:
+ *   get:
+ *     summary: Get logs by log type for a specific application and month
+ *     tags: [Logs]
+ *     parameters:
+ *       - in: path
+ *         name: appId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The application ID
+ *       - in: path
+ *         name: type
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The type of log (e.g., "Crash", "DailyLogin")
+ *       - in: path
+ *         name: month
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           maximum: 12
+ *         description: The numeric month (1-12)
+ *     responses:
+ *       200:
+ *         description: Logs for the given application, log type, and month
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   logId:
+ *                     type: string
+ *                   appId:
+ *                     type: string
+ *                   userId:
+ *                     type: string
+ *                   logType:
+ *                     type: string
+ *                   timestamp:
+ *                     type: string
+ *                     format: date-time
+ *                   description:
+ *                     type: string
+ *       400:
+ *         description: Invalid month parameter
+ *       404:
+ *         description: No logs found for the application, log type, and month
+ *       500:
+ *         description: Internal server error
+ */
+router.get(
+  "/applications/:appId/logType/:type/month/:month",
+  LogsController.getLogsByTypeAndMonth
+);
 
 module.exports = router;
